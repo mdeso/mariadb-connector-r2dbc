@@ -96,7 +96,7 @@ public final class MariadbConnectionConfiguration {
       @Nullable LoopResources loopResources,
       @Nullable UnaryOperator<SslContextBuilder> sslContextBuilderCustomizer,
       boolean sslTunnelDisableHostVerification) {
-    this.haMode = haMode == null ? HaMode.NONE : HaMode.from(haMode);
+    this.haMode = haMode == null || haMode.length() == 0 ? HaMode.NONE : HaMode.from(haMode);
     this.connectTimeout = connectTimeout == null ? Duration.ofSeconds(10) : connectTimeout;
     this.tcpKeepAlive = tcpKeepAlive == null ? Boolean.FALSE : tcpKeepAlive;
     this.tcpAbortiveClose = tcpAbortiveClose == null ? Boolean.FALSE : tcpAbortiveClose;
