@@ -159,17 +159,6 @@ public final class HandshakeResponse implements ClientMessage {
     BufferUtils.writeLengthEncode("_client_name", buf);
     BufferUtils.writeLengthEncode(MariadbConnectionFactoryProvider.MARIADB_DRIVER, buf);
 
-    final Properties properties = new Properties();
-    try (InputStream inputStream =
-        getClass().getClassLoader().getResourceAsStream("project" + ".properties")) {
-      properties.load(inputStream);
-
-      BufferUtils.writeLengthEncode("_client_version", buf);
-      BufferUtils.writeLengthEncode(properties.getProperty("version"), buf);
-    } catch (IOException ie) {
-      // eat
-    }
-
     BufferUtils.writeLengthEncode("_server_host", buf);
     BufferUtils.writeLengthEncode(hostAddress != null ? hostAddress.getHost() : "", buf);
 
